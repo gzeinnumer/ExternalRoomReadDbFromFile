@@ -27,40 +27,50 @@ public class SplashScreenActivity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
+    TextView tv;
+    String msg="externalreadfile\n";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        setTitle(TAG);
+
+        tv = findViewById(R.id.tv);
 
         if (checkPermissions()) {
+            msg+="Izin diberikan\n";
+            tv.setText(msg);
             onSuccessCheckPermitions();
         } else {
-            Toast.makeText(this, "Beri izin dulu", Toast.LENGTH_SHORT).show();
-            ((TextView) findViewById(R.id.tv)).setText("Beri izin dulu");
+            msg+="Beri izin dulu\n";
+            tv.setText(msg);
         }
     }
 
     private void onSuccessCheckPermitions() {
         if (FunctionGlobalDir.initFolder()){
             if (FunctionGlobalDir.isFileExists(FunctionGlobalDir.appFolder)){
-                Toast.makeText(this, "Sudah bisa lanjut", Toast.LENGTH_SHORT).show();
-                ((TextView) findViewById(R.id.tv)).setText("Sudah bisa lanjut");
+                msg+="Sudah bisa lanjut\n";
+                tv.setText(msg);
 
                 if (FunctionGlobalZip.initFileFromStringToZipToFile()){
                     Toast.makeText(this, "Sudah Success load Data", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 } else {
+                    msg += "Gagal load Data\n";
+                    tv.setText(msg);
                     Toast.makeText(this, "Gagal load Data", Toast.LENGTH_SHORT).show();
                 }
 
             } else {
-                Toast.makeText(this, "Direktory tidak ditemukan", Toast.LENGTH_SHORT).show();
-                ((TextView) findViewById(R.id.tv)).setText("Direktory tidak ditemukan");
+                msg+="Direktory tidak ditemukan\n";
+                tv.setText(msg);
             }
         } else {
-            Toast.makeText(this, "Gagal membuat folder", Toast.LENGTH_SHORT).show();
-            ((TextView) findViewById(R.id.tv)).setText("Gagal membuat folder");
+            msg+="Gagal membuat folder\n";
+            tv.setText(msg);
         }
     }
 
