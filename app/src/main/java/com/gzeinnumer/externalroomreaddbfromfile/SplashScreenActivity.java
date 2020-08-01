@@ -28,7 +28,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     };
 
     TextView tv;
-    String msg="externalreadfile\n";
+    String msg="externalroomreaddbfromfile\n";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
