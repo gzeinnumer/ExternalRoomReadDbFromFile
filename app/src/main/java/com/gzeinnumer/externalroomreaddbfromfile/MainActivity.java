@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.gzeinnumer.externalroomreaddbfromfile.data.AppDatabase;
 import com.gzeinnumer.externalroomreaddbfromfile.helper.FunctionGlobalDir;
+import com.gzeinnumer.externalroomreaddbfromfile.helper.FunctionGlobalZip;
 import com.gzeinnumer.externalroomreaddbfromfile.model.SampleTable;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,12 +28,14 @@ public class MainActivity extends AppCompatActivity {
         AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
 
         FunctionGlobalDir.myLogD(TAG, "Jumlah Data dalam dalam table sample_data ada "+appDatabase.sampleTableDao().getAll().size());
-        msg+="Jumlah Data dalam dalam table sample_data ada "+appDatabase.sampleTableDao().getAll().size();
+        msg+="Jumlah Data dalam dalam table sample_data ada "+appDatabase.sampleTableDao().getAll().size()+"\n";
 
         appDatabase.sampleTableDao().insertAll(new SampleTable(0, "data baru"));
+        appDatabase.copyFile(appDatabase);
+        msg+="Data baru diinsert"+"\n";
 
         FunctionGlobalDir.myLogD(TAG, "Jumlah Data dalam dalam table sample_data ada "+appDatabase.sampleTableDao().getAll().size());
-        msg+="Jumlah Data dalam dalam table sample_data ada "+appDatabase.sampleTableDao().getAll().size();
+        msg+="Jumlah Data dalam dalam table sample_data ada "+appDatabase.sampleTableDao().getAll().size()+"\n";
 
         tv.setText(msg);
     }
