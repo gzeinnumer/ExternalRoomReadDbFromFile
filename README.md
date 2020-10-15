@@ -54,11 +54,17 @@ public abstract class AppDatabase extends RoomDatabase {
 ```
 
 #### Important
-Every new transaction process `Insert, Update, Delete` or `ON APP DESTROY` you should use `copyFile` to backup Database `Room` from root to eksternal. Here is the example.
+Every new transaction process `Insert, Update, Delete` or `ON APP DESTROY` you should use `copyFile` to close Database and backup Database `Room` from root to eksternal. Here is the example.
 
 ```java
 AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
 
 appDatabase.sampleTableDao().insertAll(new SampleTable(0, "data baru"));
 appDatabase.copyFile(appDatabase);
+```
+
+---
+
+```
+Copyright 2020 M. Fadli Zein
 ```
